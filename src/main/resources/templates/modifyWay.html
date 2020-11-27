@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>汽车客运管理系统</title>
+<!-- Bootstrap -->
+<link href="#" th:href="@{/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<script type="text/javascript" src="#" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="#"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="#" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" src="tickets/wayMgr/js/jquery.min.js"></script>
+<script type="text/javascript" src="tickets/wayMgr/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="tickets/wayMgr/js/main.js"></script>
+</head>
+<body>
+	<!-- 标题栏 -->
+	<div
+		th:replace="~{comm/titleBar::titleBar('way',@{/},${orderIndex},${orderFlag},null)}"></div>
+	<!-- body -->
+	<div class="container">
+		<div class="row">
+			<!-- 菜单 -->
+			<div class="col-md-3"
+				th:include="~{comm/titleBar::mainMenu('way')}"></div>
+					<!-- 注册表单 -->
+			<div class="col-md-5 col-md-offset-2">
+				<form action="#" th:action="@{/way/modifyRoute}" method="post">
+				<div class="form-group">
+						<label for="routeId">线路编号</label> <input type="text"
+							class="form-control" id="routeId" name="routeId" th:value="${route.routeId}" readonly="readonly">
+					</div>
+				<div class="form-group">
+						<label for="routeName">线路名称</label> <input type="text"
+							class="form-control" id="routeName" name="routeName" th:value="${route.routeName}">
+					</div>
+					<div class="form-group" id="dnameParDiv">
+						<label for="starStation">始发站</label> 
+						<select id="starStation" name="startStation.stationId" class="form-control">
+							<option th:value="1" th:text="${route.startStation.stationName}">西安2</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="terminalStation">终点站</label>
+						<select id="terminalStation" name="terminalStation.stationId" class="form-control">
+							<option th:each="station:${stations}" th:value="${station.stationId}" th:text="${station.stationName}">铜川</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="price">全程基本票价</label> <input type="text"
+							class="form-control" id="price" name="price" th:value="${route.price}">
+					</div>
+					<div class="col-md-6 col-md-offset-3">
+						<button type="submit" class="btn btn-primary form-control">保存</button>
+					</div>
+				</form>
+			</div>
+				</div>
+			</div>
+		
+</body>
+</html>
